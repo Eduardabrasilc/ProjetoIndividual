@@ -366,14 +366,19 @@ html {
     position: relative;
     border-radius: 15px;
     margin-top: 65%;
-    margin-left: 155%;
+    width: 35%;
+    margin-left: 70%;
+    margin-top: 23%;
+    transform: rotate(-90deg);
+
+
 }
 
 .conteudo-img p {
     display: flex;
     position: absolute;
     /* transform: rotate(-13deg); */
-    margin-top: 25%;
+    margin-top: 29%;
     margin-left: 5%;
     font-family: 'Poppins';
     font-style: normal;
