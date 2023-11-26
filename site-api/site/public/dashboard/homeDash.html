@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Homeow</title>
+    <style>
+        /* Estilos para os KPIs */
+        .kpi {
+            display: inline-block;
+            padding: 20px;
+            margin: 10px;
+            background-color: #cc3fff;
+            border-radius: 5px;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: rgba(0, 0, 0, 0.765) 0px 4px 12px;
+        }
+
+        body {
+            color: rgb(119, 70, 144);
+            background: linear-gradient(135deg, #fefaff, #cf8cff);
+        }
+
+        .botao button {
+            display: inline-block;
+            padding: 5px;
+            margin: 10px;
+            background-color: #5f0081;
+            border-radius: 11px;
+            border: none;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            background-color: #680076;
+        }
+        /* Estilos para os contêineres dos gráficos */
+        .chart-container {
+            width: 270px;
+            /* height: 300px; */
+            /* margin: 20px; */
+            flex-direction: column;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.286) 0px 4px 12px;
+            border-radius: 15px;
+            margin-top: 5%;
+        }
+
+        .chart-container1 {
+            width: 740px;
+            /* height: 740px; */
+            flex-direction: row;
+            margin-top: 9%;
+            margin-left: 5%;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.286) 0px 4px 12px;
+            border-radius: 15px;
+        }
+
+        .charts {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: end;
+            margin-top: -49%;
+            margin-right: 10%;
+            
+        }
+
+        /* Estilos para a aba de perfil */
+        .perfil {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            background-color: #8C00BD;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .perfil-content {
+            display: none;
+            position: fixed;
+            left: 20px;
+            top: 60px;
+            background-color: #8C00BD;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .perfil-content.active {
+            display: block;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="kpi">Questões A escolhidas: <span id="kpiA">0</span></div>
+    <div class="kpi">Questões B escolhidas: <span id="kpiB">0</span></div>
+    <div class="kpi">Questões C escolhidas: <span id="kpiC">0</span></div>
+
+    <div class="botao">
+    <button class="btn" onclick="voltarHome()">Voltar à Home</button>
+    <button class="btn" onclick="novoQuiz()">Tentar um Novo Quiz</button>
+</div>
+
+    <div class="graficos">
+    <div class="chart-container1">
+        <canvas id="chartAcertos"></canvas>
+    </div>
+    
+    <div class="charts">
+    <div class="chart-container">
+        <canvas id="chartRespostas"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="chartPontuacao"></canvas>
+    </div>
+</div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dados de exemplo para os gráficos (substitua pelos seus dados reais)
+        const dadosAcertos = {
+            labels: [],
+            datasets: [{
+                label: 'Ranking',
+                data: [],
+                backgroundColor: '#cc3fff',
+                borderWidth: 1
+            }]
+        };
+
+        const dadosRespostas= {
+  labels: [
+    'Opção A',
+    'Opção B',
+    'Opção C',
+    'Opção D'
+  ],
+  datasets: [{
+    label: 'Pessoas que escolheram as mesmas opções',
+    data: [300, 50, 100, 200],
+    backgroundColor: [
+      'rgb(192, 65, 255)',
+      'rgb(220, 151, 255)',
+      'rgb(78, 19, 107)',
+      'rgb(119, 70, 144)'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+        const dadosPontuacao = {
+            labels: ['Pontuação Igual'],
+            datasets: [{
+                label: 'Desempenho',
+                data: [25, 100],
+                backgroundColor: [
+                'rgb(192, 65, 255)',
+                'rgb(220, 151, 255)'],
+                borderWidth: 1,
+
+            }]
+        };
+
+        // Atualiza os KPIs com dados de exemplo (substitua pelos seus dados reais)
+        document.getElementById('kpiA').innerText = '20';
+        document.getElementById('kpiB').innerText = '15';
+        document.getElementById('kpiC').innerText = '10';
+
+        // Funções de exemplo para os botões (substitua por suas funcionalidades reais)
+        function voltarHome() {
+            console.log('Voltar à Home');
+            // Adicione aqui a lógica para voltar à Home
+        }
+
+        function novoQuiz() {
+            console.log('Tentar um Novo Quiz');
+            // Adicione aqui a lógica para iniciar um novo quiz
+        }
+
+        // Cria os gráficos
+        const ctxAcertos = document.getElementById('chartAcertos').getContext('2d');
+        const chartAcertos = new Chart(ctxAcertos, {
+            type: 'bar',
+            data: dadosAcertos
+        });
+
+        const ctxRespostas = document.getElementById('chartRespostas').getContext('2d');
+        const chartRespostas = new Chart(ctxRespostas, {
+            type: 'doughnut',
+            data: dadosRespostas
+        });
+
+        const ctxPontuacao = document.getElementById('chartPontuacao').getContext('2d');
+        const chartPontuacao = new Chart(ctxPontuacao, {
+            type: 'doughnut',
+            data: dadosPontuacao
+        });
+        
+    </script>
+</body>
+</html>
