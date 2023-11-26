@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+   
+</head>
+
+<body>
+    <div class="container">
+        <div class="buttonsForm">
+            <div class="btnColor"></div>
+            <button id="btnlogin">Login </button>
+            <button id="btncadastro">Cadastro</button>
+        </div>
+
+        <div id="login" class="form">
+            <input type="text" placeholder="Email" required id="email1_input" />
+            <i class="fas fa-envelope iEmail"></i>
+            <input type="password" placeholder="Senha" required id="senha1_input"/>
+            <i class="fas fa-lock iPassword"></i>
+            <button onclick="entrar()">Login</button>
+        </div>
+
+        <div id="cadastro" class="form">
+            <input type="text" placeholder="Nome completo" required id="nome_input"/>
+            <i class="fas fa-lock iNome"></i>
+            <!-- <input type="text" placeholder="Sobrenome" required />
+            <i class="fas fa-lock iSobrenome"></i> -->
+            <!-- <input type="text" placeholder="CPF" required />
+            <i class="fas fa-lock iCPF"></i> -->
+            <input type="text" placeholder="Email" required  id="email_input"/>
+            <i class="fas fa-envelope iEmail"></i>
+            <input type="password" placeholder="Senha" required id="senha_input" />
+            <i class="fas fa-lock iPassword"></i>
+            <!-- <input type="password" placeholder="Confirmar senha" required />
+            <i class="fas fa-lock iPassword2"></i> -->
+
+
+            <button onclick="cadastrar()">Cadastrar</button>
+            <div id="div_senha"></div>
+            <div id="div_email"></div>
+            </div>
+
+    </div>
+
+    <script src="login.js"></script>
+</body>
+
+</html>
+<script> 
+    // função cadastrar 
+    function cadastrar() {
+            // aguardar();
+    
+            //Recupere o valor da nova input pelo nome do id
+            // Agora vá para o método fetch logo abaixo
+            var nickname = nome_input.value;
+            var email = email_input.value;
+            var senha = senha_input.value;
+           
+    
+            // nome_input.value = "";
+            // email_input.value = "";
+            // dtnasc_input.value = "";
+            // senha_input.value = "";
+    
+            // div_email.innerHTML = "";
+            // div_senha.innerHTML = "";
+            // div_erro.innerHTML = "";
+    
+    
+            if (nickname == "\b" || email == "\b" ||  senha == "\b") {
+                alert("preencha o formulario")
+    
+                // 
+                return false;
+            } else if (!email.includes("@gmail.com") && !email.includes("@hotmail.com") && !email.includes("@outlook.com")) {
+                div_email.innerHTML = `Email inválido deve conter @ e .`;
+            } else if (senha.length <= 6) {
+                div_senha.innerHTML = `A senha deve conter mais de 6 caracteres`;
+            } else {
+                        fetch("/usuarios/cadastrar", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+    
+                                // crie um atributo que recebe o valor recuperado aqui
+                                // Agora vá para o arquivo routes/usuario.js
+    
+                                nicknameServer: nickname,
+                                emailServer: email,
+                                senhaServer: senha,
+                                
+    
+                            })
+                        }).then(function (resposta) {
+    
+                            console.log("resposta: ", resposta);
+    
+                            if (resposta.ok) {
+                                // cardErro.style.display = "block";
+    
+                                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+    
+                                setTimeout(() => {
+                                    window.location = "login.html";
+                                }, "2000")
+    
+                                limparFormulario();
+                                // finalizarAguardar();
+                            } else {
+                                throw new Error("Houve um erro ao tentar realizar o cadastro!");
+                            }
+                        }).catch(function (resposta) {
+                            console.log(`#ERRO: ${resposta}`);
+                            // finalizarAguardar();
+                        });
+    
+                        return false;
+                    }
+                }
+               
+    
+    // funçao login
+    // function entrar() {
+    //         // aguardar();
+    
+    //         var email = email_input.value;
+    //         var senha = senha_input.value;
+    
+    
+    //         if (email.indexOf("@") == -1 && email.indexOf(".") == -1) {
+    //             cardErro.style.display = "block"
+    //             mensagem_erro.innerHTML = "O email deve conter @ e .";
+    
+    //             // finalizarAguardar();
+    //             return false;
+    //         }
+    //         else if(senha != senha ){
+    //             cardErro.style.display = "block"
+    //             mensagem_erro.innerHTML = "Senha incorreta";
+    
+    //             return false;
+    //         } else if (email == "" || senha == "") {
+    //             cardErro.style.display = "block"
+    //             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+    //             return false;
+    //         }
+    //         else {
+    //             setInterval(sumirMensagem, 5000)
+    //         }
+    
+    //         console.log("FORM LOGIN: ", email);
+    //         console.log("FORM SENHA: ", senha);
+    
+    //         fetch("/usuarios/autenticar", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify({
+    //                 emailServer: email,
+    //                 senhaServer: senha
+    //             })
+    //         }).then(function (resposta) {
+    //             console.log("ESTOU NO THEN DO entrar()!")
+    
+    //             if (resposta.ok) {
+    //                 console.log(resposta);
+    
+    //                 resposta.json().then(json => {
+    //                     console.log(json);
+    //                     console.log(JSON.stringify(json));
+                        
+    //                     sessionStorage.EMAIL_USUARIO = json.email;
+    //                     sessionStorage.NICKNAME_USUARIO = json.nickname;
+    //                     sessionStorage.IDUSUARIO_USUARIO = json.idUsuario;
+                        
+    
+    //                     setTimeout(function () {
+    //                         window.location = "./quiz/index.html";
+    //                     }, 1000); 
+    
+    //                 });
+    
+    //             } else {
+    
+    //                 console.log("Houve um erro ao tentar realizar o login!");
+    
+    //                 resposta.text().then(texto => {
+    //                     console.error(texto);
+    //                 });
+    //             }
+    
+    //         }).catch(function (erro) {
+    //             console.log(erro);
+    //         })
+    
+    //         return false;
+    //     }
+    
+    //     function sumirMensagem() {
+    //         cardErro.style.display = "none"
+    //     }
+    
+    </script>

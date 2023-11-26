@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Homeow</title>
+    <link rel="stylesheet" href="style-quiz.css">
+</head>
+<body>
+    <div class="quiz-wrapper">
+        <div class="quiz-box" id="quiz">
+            <div class="question-count">
+                <p class="count"><span id="count-question">3</span>/<strong id="tol-num-que">10</strong></p>
+                <p class="question-title">Questão</p>
+            </div>
+            <div class="question-box">
+                <span id="question-number">3</span>
+                <p id="question">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum nihil dicta facilis aliquam earum libero quia quod cum?</p>
+            </div>
+
+            <div class="answers-box">
+                <div class="box">
+                    <div class="answer-number">A</div>
+                    <input type="radio" name="option" id="first" value="a" required hidden>
+                    <label for="first" class="answer-table">Testing 1</label>
+                </div>
+
+                <div class="box">
+                    <div class="answer-number">B</div>
+                    <input type="radio" name="option" id="second" value="b" required hidden>
+                    <label for="second" class="answer-table">Testing 2</label>
+                </div>
+
+                <div class="box">
+                    <div class="answer-number">C</div>
+                    <input type="radio" name="option" id="third"" value="c" required hidden>
+                    <label for="third" class="answer-table">Testing 3</label>
+                </div>
+
+                <div class="box">
+                    <div class="answer-number">D</div>
+                    <input type="radio" name="option" id="fourth" value="d" required hidden>
+                    <label for="fourth" class="answer-table">Testing 4</label>
+                </div>
+            </div>
+
+            <div class="button-box">
+                <button type="button" class="next-btn button" id="next-question-btn">Próxima questão</button>
+                <button type="button" class="next-btn button submite-btn" id="submite">Enviar respostas</button>
+            </div>
+        </div>
+        <div class="result-show" id="result">
+            <h2 id="score">Questions Answerd</h2>
+            <div class="button-box">
+                <button class="button" onclick="location.reload();">Refazer</button>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <script src="scriptQuiz.js"></script>
+</body>
+</html>
