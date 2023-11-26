@@ -54,7 +54,33 @@ const quizData = [{
         c: "Pisoteio",
         d: "Kneading",
         correct: "d"
-    }];
+    },
+
+    {
+        question: "Qual é o nome do fenômeno em que os gatos têm olhos de cores diferentes?",
+        a: "Bicromia",
+        b: "Oculismo",
+        c: "Divergência ocular",
+        d: "Heterocromia",
+        correct: "d"
+    },
+    {
+        question: "Qual é o nome do fenômeno que ocorre quando os gatos mordem e lambem seus tutores?",
+        a: "Acatamento",
+        b: "Biting Love",
+        c: "Mordedura Afetiva",
+        d: "Kneading",
+        correct: "d"
+    },
+    {
+        question: "O que é um gato polidáctilo?",
+        a: "Um gato que gosta de nadar",
+        b: "Um gato com mais dedos que o normal nas patas",
+        c: "Um gato com problemas de visão",
+        d: "Um gato que gosta de brincar com outros animais",
+        correct: "b"
+    }
+    ];
 
 
 

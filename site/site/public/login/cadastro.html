@@ -110,7 +110,7 @@
                                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
     
                                 setTimeout(() => {
-                                    window.location = "login.html";
+                                    window.location = "cadastro.html";
                                 }, "2000")
     
                                 limparFormulario();
@@ -185,7 +185,7 @@
                         
     
                         setTimeout(function () {
-                            window.location = "./quiz/index.html";
+                            window.location = "./quizHome.html";
                         }, 1000); 
     
                     });
@@ -209,5 +209,18 @@
         function sumirMensagem() {
             cardErro.style.display = "none"
         }
+
+        // function entrar() {
+        //     const email = document.getElementById('email').value;
+        //     const senha = document.getElementById('senha').value;
+
+        //     const usuarioCadastrado = JSON.parse(localStorage.getItem('usuario'));
+        //     if (usuarioCadastrado && usuarioCadastrado.email === email && usuarioCadastrado.senha === senha) {
+        //         alert('Login realizado com sucesso!');
+        //         window.location.href = './quiz.html'; // Redireciona para a página do quiz
+        //     } else {
+        //         alert('Login inválido. Por favor, verifique seu email e senha.');
+        //     }
+        // }
     
     </script>
