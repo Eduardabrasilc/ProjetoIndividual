@@ -11,15 +11,15 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
+  background-image: url(https://img.freepik.com/premium-vector/cute-cats-pets-friendly-pattern-background_24877-6265.jpg?w=2000);
   align-items: center;
   justify-content: center;
-  background-image: url(../img/conceito-forte-de-batida-da-batida-do-atleta-da-autodefesa-do-pugilista.jpg) ;
   background-position: center;
   background-size: cover;
 }
 
 .container {
-  background-color: rgb(85, 85, 85);
+  background: linear-gradient(135deg, #fefaff, #bd66fb);
   padding: 6px;
   width: 350px;
   height: 550px;
@@ -34,10 +34,28 @@ body {
 
 .form {
   position: absolute;
-  margin-top: 90px;
+  margin-top: 50%;
   transition: .5s;
   width: 300px;
   height: 400px;
+}
+
+.form button {
+  display: flex;
+  border-radius: 15px;
+  background-color: #a635f7;
+  width: 50%;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  margin-top: 10%;
+  margin-left: 25%;
+
 }
 
  #login{
@@ -48,7 +66,7 @@ body {
   margin-top: 40px;
   position: relative;
   border-radius: 30px;
-  box-shadow: 0 0 7px 0 blue;
+  box-shadow: 0 0 7px 0 rgb(186, 24, 255);
 }
 
 .buttonsForm button {
@@ -57,13 +75,14 @@ body {
   border: none;
   position: relative;
   padding: 10px 29px;
+  color: black;
 }
 
 .btnColor {
   position: absolute;
   width: 108px;
   height: 100%;
-  background: linear-gradient(to right, blue, rgb(76, 127, 238));
+  background: linear-gradient(to right, #bd66fb, rgb(139, 45, 227));
   border-radius: 30px;
   transition: .3s;
 }
