@@ -497,14 +497,17 @@ html {
     margin-top: -5%;
 }
 
-.quiz-botao button {
+.quiz-botao a{
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
     background-color: #8C00BD;
     color: white;
     border-radius: 15px;
-    padding: 11px 29px;
+    padding: 14px 31px;
     border: none;
     cursor: pointer;
-    margin-top: 4%;
+    margin-top: 6%;
     box-shadow: 0px 4px 6px rgba(128, 0, 128, 0.5);
 }
 
@@ -514,12 +517,20 @@ html {
 }
 
 .quiz-botao {
+    text-decoration: none;
     display: flex;
     width: 45%;
     height: 15%;
     position: absolute;
-    margin-left: 39%;
-    padding-top: 15%;
+    margin-left: 26%;
+    padding-top: 12%;
+    align-items: center;
+    justify-content: center;
+}
+
+#quiz {
+    text-decoration: none;
+    display: flex;
 }
 
 .container7 {
