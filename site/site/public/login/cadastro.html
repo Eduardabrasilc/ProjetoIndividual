@@ -53,6 +53,7 @@
 
 </html>
 <script> 
+
     // função cadastrar 
     function cadastrar() {
             // aguardar();
@@ -132,8 +133,8 @@
     function entrar() {
             // aguardar();
     
-            var email = email_input.value;
-            var senha = senha_input.value;
+            var email = email1_input.value;
+            var senha = senha1_input.value;
     
     
             if (email.indexOf("@") == -1 && email.indexOf(".") == -1) {
@@ -154,9 +155,7 @@
                 return false;
             }
             else {
-                setInterval(sumirMensagem, 5000)
-            }
-    
+            
             console.log("FORM LOGIN: ", email);
             console.log("FORM SENHA: ", senha);
     
@@ -180,7 +179,7 @@
                         console.log(JSON.stringify(json));
                         
                         sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NICKNAME_USUARIO = json.nickname;
+                        sessionStorage.SENHA_USUARIO = json.senha;
                         sessionStorage.IDUSUARIO_USUARIO = json.idUsuario;
                         
     
@@ -202,13 +201,11 @@
             }).catch(function (erro) {
                 console.log(erro);
             })
+        }
     
             return false;
         }
     
-        function sumirMensagem() {
-            cardErro.style.display = "none"
-        }
 
         // function entrar() {
         //     const email = document.getElementById('email').value;
