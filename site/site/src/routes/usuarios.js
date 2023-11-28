@@ -16,4 +16,8 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+router.post("/pontos_finais", function (req, res) {
+    usuarioController.pontos_finais(req, res);
+});
+
 module.exports = router;

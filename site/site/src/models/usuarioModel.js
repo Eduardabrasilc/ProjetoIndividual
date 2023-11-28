@@ -22,7 +22,16 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucao);
 }
 
+function pontos_finais(fkUsuario, pontosFinais) {
+    var instrucao = `
+        INSERT INTO quiz (FkUsuario, pontos) 
+        VALUES ('${fkUsuario}', '${pontosFinais}')`;
+  
+    return database.executar(instrucao);
+  }
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    pontos_finais
 };

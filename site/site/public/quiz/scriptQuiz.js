@@ -98,6 +98,7 @@ const scoreEl = document.getElementById("score");
 
 var currentQtn = 0;
 var answerd = 0;
+var pontos = 0;
 
 const loadQuiz = ()=> {
     countQuestion.innerHTML = `${currentQtn +1}`;
@@ -128,6 +129,7 @@ nextQuestionbtn.addEventListener("click", ()=> {
     if(answer) {
         if(answer===quizData[currentQtn].correct){
             answerd++;
+            pontos+=10;
         };
         currentQtn++;
         if(currentQtn<quizData.length){
@@ -140,6 +142,7 @@ submitQuiz.addEventListener("click", ()=>{
     var answer = getSelected();
     if(answer === quizData[currentQtn].correct){
         answerd++;
+        pontos+=10;
     };
     currentQtn++;
     if(getSelected()){
@@ -147,7 +150,49 @@ submitQuiz.addEventListener("click", ()=>{
         resultEl.style.display="block";
         scoreEl.innerHTML =`Questões acertadas ${answerd} / ${quizData.length}`;
     }
-})
+
+    var id = sessionStorage.IDUSUARIO_USUARIO;
+    console.log(id)
+  
+  fetch("/usuarios/pontos_finais", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        pontoServer: pontos,
+        idServer: id
+    })
+  }).then(function (resposta) {
+    console.log("ESTOU NO THEN DO entrar()!")
+  
+    if (resposta.ok) {
+        console.log(resposta);
+  
+        resposta.json().then(json => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            console.log("Respota com sucesso");
+  
+            console.log(pontos)
+        });
+  
+    } else {
+  
+        console.log("Houve um erro ao tentar realizar o login!");
+  
+        resposta.text().then(texto => {
+            console.error(texto);
+        });
+    }
+  
+  }).catch(function (erro) {
+    console.log(erro);
+  })
+  
+  return false;
+  }
+  )
 
 const getSelected =()=>{
     var answer;
