@@ -179,7 +179,7 @@ submitQuiz.addEventListener("click", ()=>{
   
     } else {
   
-        console.log("Houve um erro ao tentar realizar o login!");
+        console.log("Houve um erro!");
   
         resposta.text().then(texto => {
             console.error(texto);
