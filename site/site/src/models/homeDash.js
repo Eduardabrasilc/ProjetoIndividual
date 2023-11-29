@@ -40,7 +40,7 @@ function buscarMediaPontos() {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT AVG(totalPontos) as MediaPontosTotais
+        instrucaoSql = `SELECT AVG(pontos) as MediaPontosTotais
         FROM quiz;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");

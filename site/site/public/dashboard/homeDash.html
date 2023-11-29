@@ -48,16 +48,17 @@
             box-shadow: rgba(0, 0, 0, 0.286) 0px 4px 12px;
             border-radius: 15px;
             margin-left: 65%;
-            margin-top: -40px;
+            margin-top: -190px;
         }
 
         .chart-container p {
-            align-items: start;
-            justify-content: start;
+            align-items: center;
+            justify-content: center;
             display: flex;
             font-size: 18px;
             font-weight: 600;
             font-family: Arial, Helvetica, sans-serif;
+            padding: 14%;
 
         }
 
@@ -145,12 +146,12 @@
 
         // Funções de exemplo para os botões (substitua por suas funcionalidades reais)
         function voltarHome() {
-            window.location.href = './indexHome.html'
+            window.location.href = '../index.html'
 
         }
 
         function novoQuiz() {
-            window.location.href = './quizHome.html'
+            window.location.href = '../quiz/quizHome.html'
         }
 
         // Cria os gráficos
@@ -174,6 +175,8 @@
             }).catch(function (error) {
                 console.error(`Erro em obter dados para o grafico ${error.message}`)
             });
+
+            obterDadosKpi()
 
         }
 
@@ -233,7 +236,7 @@
 
                         // Cria um novo elemento para exibir o KPI
                         const kpiElement = document.createElement('p');
-                        kpiElement.textContent = `<br>Sua média:<br> ${resposta.MediaPontosTotais}`;
+                        kpiElement.textContent = `Sua média:${Number(resposta[0].MediaPontosTotais).toFixed(2)}`;
 
                         // Adiciona o elemento do KPI à div chart-container
                         chartContainer.appendChild(kpiElement);
@@ -247,11 +250,6 @@
             });
 
         }
-
-        window.onload = function () {
-    obterDadosGrafico();
-    obterDadosKpi();
-};
 
 
 
