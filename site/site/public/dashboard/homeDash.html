@@ -42,13 +42,13 @@
         /* Estilos para os contêineres dos gráficos */
         .chart-container {
             width: 270px;
-            height: 255px;
+            height: 100px;
             flex-direction: column;
             background-color: white;
             box-shadow: rgba(0, 0, 0, 0.286) 0px 4px 12px;
             border-radius: 15px;
             margin-left: 65%;
-            margin-top: -135px;
+            margin-top: -40px;
         }
 
         .chart-container p {
@@ -233,7 +233,7 @@
 
                         // Cria um novo elemento para exibir o KPI
                         const kpiElement = document.createElement('p');
-                        kpiElement.textContent = `Sua média: ${resposta.MediaPontosTotais}`;
+                        kpiElement.textContent = `<br>Sua média:<br> ${resposta.MediaPontosTotais}`;
 
                         // Adiciona o elemento do KPI à div chart-container
                         chartContainer.appendChild(kpiElement);
