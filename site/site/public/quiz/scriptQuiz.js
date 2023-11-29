@@ -172,7 +172,7 @@ submitQuiz.addEventListener("click", ()=>{
         resposta.json().then(json => {
             console.log(json);
             console.log(JSON.stringify(json));
-            console.log("Respota com sucesso");
+            console.log("Resposta com sucesso");
   
             console.log(pontos)
         });

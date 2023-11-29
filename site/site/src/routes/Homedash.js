@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-var medidaController = require("../controllers/medidaController");
+var homedash = require("../controllers/homeDash");
 
-router.get("/ultimas/:idAquario", function (req, res) {
-    medidaController.buscarUltimasMedidas(req, res);
+router.get("/ranking", function (req, res) {
+    homedash.buscarRanking(req, res);
 });
 
-router.get("/tempo-real/:idAquario", function (req, res) {
-    medidaController.buscarMedidasEmTempoReal(req, res);
+router.get("/media", function (req, res) {
+    homedash.buscarMedia(req, res);
 })
 
 module.exports = router;

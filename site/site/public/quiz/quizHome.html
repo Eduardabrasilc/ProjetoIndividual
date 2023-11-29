@@ -52,7 +52,7 @@
         <div class="result-show" id="result">
             <h2 id="score">Questions Answerd</h2>
             <div class="button-box">
-                <button class="button" onclick="location.reload();">Refazer</button>
+                <button class="button" onclick="redirectDash();">Ver resultados</button>
             </div>
         </div>
     </div>
@@ -62,3 +62,8 @@
     <script src="scriptQuiz.js"></script>
 </body>
 </html>
+<script>
+    function redirectDash() {
+        window.location = "../dashboard/homeDash.html"
+    }
+</script>

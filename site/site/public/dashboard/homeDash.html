@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard Homeow</title>
     <style>
@@ -33,20 +34,31 @@
             font-size: 12px;
             font-weight: 600;
         }
-        
+
         .btn:hover {
             background-color: #680076;
         }
+
         /* Estilos para os contêineres dos gráficos */
         .chart-container {
             width: 270px;
-            /* height: 300px; */
-            /* margin: 20px; */
+            height: 255px;
             flex-direction: column;
             background-color: white;
             box-shadow: rgba(0, 0, 0, 0.286) 0px 4px 12px;
             border-radius: 15px;
-            margin-top: 5%;
+            margin-left: 65%;
+            margin-top: -135px;
+        }
+
+        .chart-container p {
+            align-items: start;
+            justify-content: start;
+            display: flex;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: Arial, Helvetica, sans-serif;
+
         }
 
         .chart-container1 {
@@ -67,7 +79,7 @@
             align-items: end;
             margin-top: -49%;
             margin-right: 10%;
-            
+
         }
 
         /* Estilos para a aba de perfil */
@@ -97,34 +109,23 @@
         .perfil-content.active {
             display: block;
         }
-        
     </style>
 </head>
-<body>
-    <div class="kpi">Questões A escolhidas: <span id="kpiA">0</span></div>
-    <div class="kpi">Questões B escolhidas: <span id="kpiB">0</span></div>
-    <div class="kpi">Questões C escolhidas: <span id="kpiC">0</span></div>
 
+<body onload="obterDadosGrafico()">
     <div class="botao">
-    <button class="btn" onclick="voltarHome()">Voltar à Home</button>
-    <button class="btn" onclick="novoQuiz()">Tentar um Novo Quiz</button>
-</div>
+        <button class="btn" onclick="voltarHome()">Voltar à Home</button>
+        <button class="btn" onclick="novoQuiz()">Tentar um Novo Quiz</button>
+    </div>
 
     <div class="graficos">
-    <div class="chart-container1">
-        <canvas id="chartAcertos"></canvas>
+        <div class="chart-container1">
+            <canvas id="chartAcertos"></canvas>
+        </div>
+        <div class="chart-container" id="kpiC">
+        </div>
     </div>
-    
-    <div class="charts">
-    <div class="chart-container">
-        <canvas id="chartRespostas"></canvas>
     </div>
-
-    <div class="chart-container">
-        <canvas id="chartPontuacao"></canvas>
-    </div>
-</div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -139,48 +140,13 @@
             }]
         };
 
-        const dadosRespostas= {
-  labels: [
-    'Opção A',
-    'Opção B',
-    'Opção C',
-    'Opção D'
-  ],
-  datasets: [{
-    label: 'Pessoas que escolheram as mesmas opções',
-    data: [300, 50, 100, 200],
-    backgroundColor: [
-      'rgb(192, 65, 255)',
-      'rgb(220, 151, 255)',
-      'rgb(78, 19, 107)',
-      'rgb(119, 70, 144)'
-    ],
-    hoverOffset: 4
-  }]
-};
 
-        const dadosPontuacao = {
-            labels: ['Pontuação Igual'],
-            datasets: [{
-                label: 'Desempenho',
-                data: [25, 100],
-                backgroundColor: [
-                'rgb(192, 65, 255)',
-                'rgb(220, 151, 255)'],
-                borderWidth: 1,
-
-            }]
-        };
-
-        // Atualiza os KPIs com dados de exemplo (substitua pelos seus dados reais)
-        document.getElementById('kpiA').innerText = '20';
-        document.getElementById('kpiB').innerText = '15';
-        document.getElementById('kpiC').innerText = '10';
+        var kpiC = document.getElementById('kpiC');
 
         // Funções de exemplo para os botões (substitua por suas funcionalidades reais)
         function voltarHome() {
             window.location.href = './indexHome.html'
-        
+
         }
 
         function novoQuiz() {
@@ -189,23 +155,107 @@
 
         // Cria os gráficos
         const ctxAcertos = document.getElementById('chartAcertos').getContext('2d');
-        const chartAcertos = new Chart(ctxAcertos, {
-            type: 'bar',
-            data: dadosAcertos
-        });
 
-        const ctxRespostas = document.getElementById('chartRespostas').getContext('2d');
-        const chartRespostas = new Chart(ctxRespostas, {
-            type: 'doughnut',
-            data: dadosRespostas
-        });
 
-        const ctxPontuacao = document.getElementById('chartPontuacao').getContext('2d');
-        const chartPontuacao = new Chart(ctxPontuacao, {
-            type: 'doughnut',
-            data: dadosPontuacao
-        });
-        
+
+
+        function obterDadosGrafico() {
+            fetch(`/homeDash/ranking`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        plotarGrafico(resposta);
+                    })
+                } else {
+                    console.error(`Nenhum dado encontrado ou erro na API`)
+                }
+            }).catch(function (error) {
+                console.error(`Erro em obter dados para o grafico ${error.message}`)
+            });
+
+        }
+
+        function plotarGrafico(resposta) {
+
+
+            console.log('iniciando plotagem do gráfico...');
+
+            // Criando estrutura para plotar gráfico - labels
+            let labels = [];
+
+            // Criando estrutura para plotar gráfico - dados
+            let dados = {
+                labels: labels,
+                datasets: [{
+                    label: 'Ranking',
+                    data: [],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            };
+
+            console.log(resposta)
+
+            // Inserindo valores recebidos em estrutura para plotar o gráfico
+            for (i = 0; i < resposta.length; i++) {
+                var respostaAtual = resposta[i];
+                labels.push(respostaAtual.nomeUsuario);
+                dados.datasets[0].data.push(respostaAtual.totalPontos);
+            }
+
+            console.log('----------------------------------------------')
+            console.log('O gráfico será plotado com os respectivos valores:')
+            console.log('Labels:')
+            console.log(labels)
+            console.log('Dados:')
+            console.log(dados.datasets)
+            console.log('----------------------------------------------')
+            const chartAcertos = new Chart(ctxAcertos, {
+                type: 'bar',
+                data: dados
+            });
+            // chartAcertos.update()
+        }
+
+
+
+
+        function obterDadosKpi() {
+            fetch(`/homeDash/media`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados KPI recebidos: ${JSON.stringify(resposta)}`);
+
+                        const chartContainer = document.querySelector('.chart-container');
+
+                        // Cria um novo elemento para exibir o KPI
+                        const kpiElement = document.createElement('p');
+                        kpiElement.textContent = `Sua média: ${resposta.MediaPontosTotais}`;
+
+                        // Adiciona o elemento do KPI à div chart-container
+                        chartContainer.appendChild(kpiElement);
+
+                    })
+                } else {
+                    console.error(`Nenhum dado encontrado ou erro na API`)
+                }
+            }).catch(function (error) {
+                console.error(`Erro em obter dados para o grafico ${error.message}`)
+            });
+
+        }
+
+        window.onload = function () {
+    obterDadosGrafico();
+    obterDadosKpi();
+};
+
+
+
     </script>
 </body>
+
 </html>
